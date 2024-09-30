@@ -1,90 +1,66 @@
-// import { View, Text, ScrollView, Image, Alert } from "react-native";
-// import React, { useState } from "react";
-// import { SafeAreaView } from "react-native-safe-area-context";
-// import { images } from "../../constants";
-// import FormField from "../../components/FormField";
-// import CustomButton from "../../components/CustomButton";
-// import { Link, router } from "expo-router";
-// import { signIn } from "../../lib/appwrite";
+import React, { useState } from 'react';
+import { View, TextInput, Text, TouchableOpacity, ScrollView, Alert, Image } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { icons } from '../../constants';
+import { router } from 'expo-router';
 
-// const SignIn = () => {
-//   const [form, setForm] = useState({
-//     email: "",
-//     password: "",
-//   });
+export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-//   const [isSubmitting, setisSubmitting] = useState(false);
+  const handleSignIn = () => {
+    if (!email || !password) {
+      Alert.alert('Please fill in all fields.');
+      return;
+    }
+    console.log({ email, password });
+    Alert.alert('Sign In Successful!');
+  };
 
-//   const submit = async() => {
-//     if(!form.email || !form.password) {
-//       Alert.alert("Error", "Please fill in all the fields");
-//     }
-//     setisSubmitting(true);
-//     try {
-//       await signIn(form.email,form.password);
-//       //set it to global state..
-//       router.replace("/home");
-//     } catch(error) {
-//       Alert.alert("Error",error.message)
-//     } finally{
-//       setisSubmitting(false);
-//     }
-//   };
-
-//   return (
-//     <SafeAreaView className="bg-primary h-full">
-//       <ScrollView>
-//         <View className="w-full justify-center min-h-[83vh] px-4 my-6">
-//           <Image
-//             source={images.logo}
-//             resizeMode="contain"
-//             className="w-[115px] h-[35px]"
-//           />
-//           <Text className="text-2xl text-white mt-10 font-psemibold">
-//             Log in to Aora
-//           </Text>
-//           <FormField
-//             title="Email"
-//             value={form.email}
-//             handleChangeText={(e) => setForm({ ...form, email: e })}
-//             otherStyles="mt-7"
-//             keyboardType="email-address"
-//           />
-//           <FormField
-//             title="Password"
-//             value={form.password}
-//             handleChangeText={(p) => setForm({ ...form, password: p })}
-//             otherStyles="mt-7"
-//           />
-//           <CustomButton
-//             title={"Sign In"}
-//             handlePress={submit}
-//             containerStyles={"mt-7"}
-//             isLoading={isSubmitting}
-//           />
-//           <View className="justify-center pt-5 flex-row gap-2">
-//             <Text className="text-lg text-gray-100 font-pregular">Don't have account?</Text>
-//             <Link href="/sign-up" className="text-lg font-psemibold text-secondary">
-//               Sign up
-//             </Link>
-//           </View>
-//         </View>
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// };
-
-// export default SignIn;
-
-import { View, Text } from 'react-native'
-import React from 'react'
-
-const SignIn = () => {
   return (
-    <View>
-      <Text>sign-in</Text>
-    </View>
-  )
-}
+    <ScrollView className="bg-white p-4 pt-20 flex-1 ">
+      <StatusBar style="dark" />
+      <View className="flex-col items-center justify-center w-full">
+        <Image source={icons.logo} className="w-32 h-32 mb-4" 
+        resizeMode='contain' />
+        <Text className="text-3xl font-bold text-center mb-8 text-blue-600">Sign In</Text>
+        
+        <View className="mb-4 w-full">
+          <Text className="text-gray-700 mb-2">Email</Text>
+          <TextInput 
+            className="border border-gray-300 p-3 rounded-lg shadow-md"
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        
+        <View className="mb-4 w-full">
+          <Text className="text-gray-700 mb-2">Password</Text>
+          <TextInput 
+            className="border border-gray-300 p-3 rounded-lg shadow-md"
+            placeholder="Enter your password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+          />
+        </View>
+        
+        <TouchableOpacity 
+          className="bg-blue-600 p-3 rounded-lg shadow-md w-full"
+          onPress={handleSignIn}
+        >
+          <Text className="text-white text-center font-semibold text-lg">Sign In</Text>
+        </TouchableOpacity>
 
-export default SignIn
+        <TouchableOpacity className="mt-4" onPress={()=>router.push('/sign-up')}>
+          <Text className="text-center text-gray-600">
+            Don't have an account?{' '}
+            <Text className="text-blue-600 font-semibold">Sign Up</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}

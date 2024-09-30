@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants"; // Ensure images is properly exported
 import { router } from "expo-router";
+import { useGlobalContext } from "./../context/GlobalProvider";
 
 export default function App() {
+
+  const {isLogged} = useGlobalContext()
+  useEffect(()=>{
+    if(isLogged){
+      router.push('/home')
+    }
+  }, [isLogged])
+  
   return (
     <SafeAreaView className="flex-1 bg-[#0f0f1f]">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

@@ -4,4 +4,6 @@ import cards from "../assets/images/cards.png";
 import empty from "../assets/images/empty.png";
 import landing from "../assets/images/landing.png";
 
+
+
 export default { landing,profile, thumbnail, cards, empty };
