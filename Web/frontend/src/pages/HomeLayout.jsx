@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import Footer from "../components/Footer";
 import { Sidebar } from "../components/Sidebar";
 
 export const HomeLayout = () => {
@@ -8,7 +8,6 @@ export const HomeLayout = () => {
     <>
       <Navbar />
       <div className="flex border-2">
-        <Sidebar />
         <Outlet />
       </div>
       <Footer />

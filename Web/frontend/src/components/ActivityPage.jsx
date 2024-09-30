@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ActivityPage = () => {
   const navigate = useNavigate()
   return (
-    <div className="flex h-screen bg-gray-100 pt-20">
+    <div className="flex h-screen bg-gray-100 w-full">
       
 
       {/* Main Content */}

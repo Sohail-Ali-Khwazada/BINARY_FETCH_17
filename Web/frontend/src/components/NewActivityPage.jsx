@@ -27,7 +27,7 @@ export const NewActivityPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f3ff] flex mt-16">
+    <div className="min-h-screen bg-[#f7f3ff] flex w-full">
       {/* Main Content */}
       <div className="flex-1 relative flex flex-col items-center">
         {/* Notification Icon */}
