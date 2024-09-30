@@ -1,9 +1,24 @@
 import React from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons } from "../../constants"; // Assuming you have these icons in your project
 
 const Home = () => {
+  const emergencyContactNumber = "9136102120"; 
+  const handleEmergencyAlert = () => {
+  
+    const message = "Emergency Alert! Please check on me.";
+    
+    // Create the SMS URL
+    const url = `sms:${emergencyContactNumber}?body=${encodeURIComponent(message)}`;
+
+    // Use Linking to open the SMS app
+    Linking.openURL(url)
+      .catch((err) => {
+        console.error("Error sending message: ", err);
+        Alert.alert("Error", "Could not send the message.");
+      });
+  };
   return (
     <SafeAreaView className="flex-1 bg-primary">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -55,7 +70,10 @@ const Home = () => {
 
         {/* Emergency Contact */}
         <View className="p-4 my-4 mx-4">
-          <TouchableOpacity className="bg-red-500 rounded-full py-4 items-center shadow-lg">
+          <TouchableOpacity 
+          className="bg-red-500 rounded-full py-4 items-center shadow-lg"
+          onPress={handleEmergencyAlert}
+          >
             <Text className="text-white font-pbold text-lg">Emergency Alert</Text>
           </TouchableOpacity>
           <Text className="text-gray-100 mt-2 text-center">Notify caregiver and family</Text>
@@ -67,7 +85,7 @@ const Home = () => {
             <Text className="text-white font-psemibold">Health Tracking</Text>
           </TouchableOpacity>
           <TouchableOpacity className="bg-secondary-100 rounded-lg p-4 w-[48%]">
-            <Text className="text-white font-psemibold">Messages</Text>
+            <Text className="text-white font-psemibold ml-6">Messages</Text>
           </TouchableOpacity>
         </View>
         
