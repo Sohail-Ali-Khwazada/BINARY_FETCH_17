@@ -2,7 +2,7 @@ import React from "react";
 import { Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../constants"; // assuming images is properly exported
+import { images } from "./constants"; // assuming images is properly exported
 
 export default function App() {
   return (
