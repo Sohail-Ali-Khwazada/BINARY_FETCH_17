@@ -16,7 +16,7 @@ export default function SignUp() {
       Alert.alert('Please fill in all fields.');
       return;
     }
-
+    
     try {
       const response = await fetch('https://6nddmv2g-5000.inc1.devtunnels.ms/api/auth/signup', {
         method: 'POST',

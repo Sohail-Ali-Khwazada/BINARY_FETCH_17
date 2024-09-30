@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true
@@ -14,15 +14,6 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true,
       minlength: 6
-    },
-    gender: {
-      type:String,
-      required: true,
-      enum:["male","female"]
-    },
-    profilePic: {
-      type: String,
-      default: ""
     }
 },{timestamps:true});
 
