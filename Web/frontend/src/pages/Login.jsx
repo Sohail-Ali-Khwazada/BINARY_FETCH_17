@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// src/components/LoginPage.js
+import React, { useState } from "react";
+import loginImage from './../assets/Images/login.png';
+import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
 export const Login = () => {
@@ -11,59 +13,77 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await login(username, password);
-    if(success) navigate("/profile");
+    if (success) navigate("/profile");  // Navigate to the profile page on success
   };
 
   return (
-    <div className="flex justify-center items-center p-4">
-      <div className="md:w-1/3 border-2 border-[#6F4DF7] rounded-xl p-6 bg-gray-900">
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
-          Login <span className="text-blue-500">iConnect</span>
-        </h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-100">
+      {/* Navbar */}
+      
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-400 text-sm mb-2">Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="johndoe"
-              className="w-full px-4 py-2 text-gray-300 bg-gray-800 border border-gray-600 rounded-lg focus:ring focus:ring-[#6F4DF7] outline-none"
-            />
+      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10">
+        {/* Left: Image Section */}
+        <div className="flex-1 hidden md:block">
+          <img src={loginImage} alt="Login Visual" className="w-full h-auto" />
+        </div>
+
+        {/* Right: Login Form */}
+        <div className="flex-1 bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
+
+          <form onSubmit={handleSubmit}>
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm mb-2">Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                placeholder="example@gmail.com"
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm mb-2">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <div className="flex justify-between items-center mb-6">
+              <a href="#" className="text-sm text-purple-600 hover:underline">Forgot password?</a>
+            </div>
+
+            <button
+              type="submit"
+              className={`w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition-colors ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "LOGIN"}
+            </button>
+          </form>
+
+          <div className="text-center mt-6">
+            <span className="text-gray-600">or Sign in with</span>
+            <div className="flex justify-center space-x-4 mt-4">
+              <button className="flex items-center justify-center bg-gray-200 p-3 rounded-full">
+                <img src="/google-icon.png" alt="Google Sign In" className="w-6 h-6" />
+              </button>
+              <button className="flex items-center justify-center bg-gray-200 p-3 rounded-full">
+                <img src="/facebook-icon.png" alt="Facebook Sign In" className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
-          <div>
-            <label className="block text-gray-400 text-sm mb-2">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Password"
-              className="w-full px-4 py-2 text-gray-300 bg-gray-800 border border-gray-600 rounded-lg focus:ring focus:ring-[#6F4DF7] outline-none"
-            />
+          <div className="text-center mt-4">
+            <span className="text-gray-600">Don’t have an account?</span>
+            <a href="#" className="text-purple-600 ml-1 hover:underline">Create one</a>
           </div>
-
-          <div className="flex gap-2 items-center mt-2 mb-2">
-            <p className="text-sm text-gray-400">Don't have an account?</p>
-            <Link className="text-sm text-blue-500 hover:underline" to="/signup">
-              Signup
-            </Link>
-          </div>
-
-          <button
-            className={`w-full py-2 text-white bg-[#6F4DF7] rounded-lg transition-all duration-200 ease-in-out ${
-              loading ? "opacity-70 cursor-not-allowed" : "hover:bg-[#5a3bd1]"
-            }`}
-            disabled={loading}
-          >
-            {loading ? (
-              <span className="loading-spinner text-white"></span>
-            ) : (
-              "Login"
-            )}
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
