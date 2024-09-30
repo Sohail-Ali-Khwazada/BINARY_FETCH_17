@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "wise_care",
-    "slug": "wise_care",
+    "name": "react-native-navigation",
+    "slug": "react-native-navigation",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,9 +22,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-router"
-    ]
+    }
   }
 }
