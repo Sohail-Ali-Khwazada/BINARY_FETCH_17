@@ -5,40 +5,27 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signUp = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword, gender } = req.body;
-
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({ error: "Passwords don't match" });
-    }
-
-    const user = await User.findOne({ username });
+    const { fullName, email, password } = req.body;
+    const user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ error: "Username already exists" });
+      return res.status(400).json({ error: "Email already exists" });
     }
-    //Hash password here
+    
     const hashPassword = await bcrypt.hash(password, 10);
-
-    //https://avatar-placeholder.iran.liara.run
-    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
     const newUser = await User.create({
       fullName,
-      username,
+      email,
       password: hashPassword,
-      gender,
-      profilePic: gender === "male" ? boyProfilePic : girlProfilePic
     })
 
+    console.log('newUser', newUser);
     if (newUser) {
-
       const token = generateTokenAndSetCookie(newUser._id, res);
       res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
-        username: newUser.username,
-        profilePic: newUser.profilePic,
+        email: newUser.email,
         token
       });
     } else {
@@ -52,8 +39,8 @@ export const signUp = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
     const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
     if (!user || !isPasswordCorrect) {
@@ -67,7 +54,7 @@ export const loginUser = async (req, res) => {
       _id: user._id,
       fullName: user.fullName,
       username: user.username,
-      profilePic: user.profilePic,
+      // profilePic: user.profilePic,
       token
     });
 

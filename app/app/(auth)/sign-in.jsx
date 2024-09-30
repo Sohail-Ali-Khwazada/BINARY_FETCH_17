@@ -3,18 +3,43 @@ import { View, TextInput, Text, TouchableOpacity, ScrollView, Alert, Image } fro
 import { StatusBar } from 'expo-status-bar';
 import { icons } from '../../constants';
 import { router } from 'expo-router';
+import { useGlobalContext } from './../../context/GlobalProvider';
+
 
 export default function SignIn() {
+  const { setUser } = useGlobalContext(); // Context to manage user state
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = () => {
+  const handleSignIn = async() => {
     if (!email || !password) {
       Alert.alert('Please fill in all fields.');
       return;
     }
-    console.log({ email, password });
-    Alert.alert('Sign In Successful!');
+    try {
+      const response = await fetch('https://6nddmv2g-5000.inc1.devtunnels.ms/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data);
+        setUser(data); 
+        router.push('/home'); 
+      } else {
+        throw new Error(data.message || 'Sign In Failed');
+      }
+      
+    } catch (err) {
+      console.error(err); // Log the error for debugging
+      Alert.alert('Sign In Failed!', err.message || 'Please try again later.');
+    }
   };
 
   return (

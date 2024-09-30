@@ -6,6 +6,7 @@ import { images } from "../constants"; // Ensure images is properly exported
 import { router } from "expo-router";
 
 export default function App() {
+
   return (
     <SafeAreaView className="flex-1 bg-[#0f0f1f]">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -29,7 +30,7 @@ export default function App() {
           <View className="absolute bottom-10 w-full px-4">
             <TouchableOpacity 
             className="bg-[#3b3b4f] py-4 rounded-full mb-4 shadow-lg"
-            onPress={() => router.push("/home")}
+            onPress={() => router.push("/sign-in")}
             >
               <Text className="text-center text-lg font-psemibold text-white">
                 Sign In
