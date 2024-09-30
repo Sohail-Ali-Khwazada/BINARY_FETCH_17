@@ -29,7 +29,7 @@ export default function App() {
           <View className="absolute bottom-10 w-full px-4">
             <TouchableOpacity 
             className="bg-[#3b3b4f] py-4 rounded-full mb-4 shadow-lg"
-            onPress={() => router.push("/sign-in")}
+            onPress={() => router.push("/home")}
             >
               <Text className="text-center text-lg font-psemibold text-white">
                 Sign In

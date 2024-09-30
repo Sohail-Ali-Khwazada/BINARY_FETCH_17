@@ -46,7 +46,7 @@ const TabsLayout = () => {
 
         {/* Reminders Tab */}
         <Tabs.Screen 
-          name="reminders" 
+          name="chat" 
           options={{
             title: "Reminders",
             headerShown: false,

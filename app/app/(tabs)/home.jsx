@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity, Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { icons } from "../../constants"; // Assuming you have these icons in your project
+import { router } from "expo-router";
 
 const Home = () => {
   const emergencyContactNumber = "9136102120"; 
@@ -84,7 +85,7 @@ const Home = () => {
           <TouchableOpacity className="bg-secondary-100 rounded-lg p-4 w-[48%]">
             <Text className="text-white font-psemibold">Health Tracking</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="bg-secondary-100 rounded-lg p-4 w-[48%]">
+          <TouchableOpacity className="bg-secondary-100 rounded-lg p-4 w-[48%]" onPress={()=>router.push("/chat")}>
             <Text className="text-white font-psemibold ml-6">Messages</Text>
           </TouchableOpacity>
         </View>
