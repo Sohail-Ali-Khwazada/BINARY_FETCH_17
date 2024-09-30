@@ -1,7 +1,7 @@
 {
-  "name": "wise_care",
-  "scheme": "wise_care",
-  "slug": "wise_care",
+  "name": "app",
+  "scheme": "app",
+  "slug": "app",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
