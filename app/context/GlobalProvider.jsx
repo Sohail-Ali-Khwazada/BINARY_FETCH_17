@@ -8,6 +8,8 @@ const GlobalProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState([]);
+  const [selectedConversation, setSelectedConversation] = useState({});
 
   return (
     <GlobalContext.Provider
@@ -17,7 +19,12 @@ const GlobalProvider = ({ children }) => {
         user,
         setUser,
         loading,
-        setLoading
+        setLoading,
+        messages,
+        setMessages,
+        selectedConversation,
+        setSelectedConversation
+
       }}
     >
       {children}

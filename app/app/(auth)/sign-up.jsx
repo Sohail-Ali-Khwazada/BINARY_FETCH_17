@@ -18,7 +18,7 @@ export default function SignUp() {
     }
     
     try {
-      const response = await fetch('https://6nddmv2g-5000.inc1.devtunnels.ms/api/auth/signup', {
+      const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

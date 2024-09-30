@@ -48,13 +48,13 @@ const TabsLayout = () => {
         <Tabs.Screen 
           name="chat" 
           options={{
-            title: "Reminders",
+            title: "Messaging",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon 
-                iconName="bell" // Bell icon from FontAwesome
+                iconName="envelope" // Bell icon from FontAwesome
                 color={color}
-                name="Reminders"
+                name="Messaging"
                 focused={focused}
               />
             )
@@ -63,13 +63,13 @@ const TabsLayout = () => {
 
         {/* Emergency Alert Tab */}
         <Tabs.Screen 
-          name="emergency" 
+          name="reminders" 
           options={{
-            title: "Emergency",
+            title: "Reminders",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon 
-                iconName="exclamation-circle" // Emergency alert icon from FontAwesome
+                iconName="bell" 
                 color={color}
                 name="Alert"
                 focused={focused}

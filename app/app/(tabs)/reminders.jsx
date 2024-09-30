@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Emergency = () => {
+const Reminders = () => {
   return (
     <View>
-      <Text>Emergency</Text>
+      <Text>Reminders</Text>
     </View>
   )
 }
 
-export default Emergency
+export default Reminders

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { SplashScreen, Stack } from "expo-router"
-import { useFonts } from "expo-font"
+import React, { useEffect } from "react";
+import { SplashScreen, Stack } from "expo-router";
+import { useFonts } from "expo-font";
 import GlobalProvider from "../context/GlobalProvider";
+import { SocketContextProvider } from "../context/SocketContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,28 +19,39 @@ const RootLayout = () => {
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
 
-  useEffect(()=> {
-    if(error) throw error;
-    if(fontsLoaded) SplashScreen.hideAsync();
-  },[fontsLoaded,error])
+  useEffect(() => {
+    if (error) throw error;
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
 
-  if(!fontsLoaded && !error) return null;
+  if (!fontsLoaded && !error) return null;
 
   return (
     <GlobalProvider>
-    <Stack>
-      <Stack.Screen name="index" options={{
-        headerShown: false
-      }}/>
-      <Stack.Screen name="(auth)" options={{
-        headerShown: false
-      }}/>
-      <Stack.Screen name="(tabs)" options={{
-        headerShown: false
-      }}/>
-    </Stack>
+      <SocketContextProvider>
+        <Stack>
+          <Stack.Screen
+            name="index"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="(auth)"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
+      </SocketContextProvider>
     </GlobalProvider>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;
