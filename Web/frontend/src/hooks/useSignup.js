@@ -10,8 +10,8 @@ function useSignup() {
   const { setAuthUser,setAuthToken } = useAuthContext();
 
 
-  const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
-    const success = handleInputErrors({ fullName, username, password, confirmPassword, gender });
+  const signup = async ({ fullName, password, email, role }) => {
+    const success = handleInputErrors({ fullName, password, email, role });
 
     if (!success) return false;
     setLoading(true);
@@ -20,7 +20,7 @@ function useSignup() {
       const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "Post",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, username, password, confirmPassword, gender }),
+        body: JSON.stringify({ fullName, password, email, role }),
       });
       const data = await res.json();
       if (data.error) {
@@ -47,13 +47,9 @@ function useSignup() {
 
 export default useSignup
 
-function handleInputErrors({ fullName, username, password, confirmPassword, gender }) {
-  if (!fullName || !username || !password || !confirmPassword || !gender) {
+function handleInputErrors({ fullName, password, email, role }) {
+  if (!fullName || !password || !email || !role) {
     toast.error("Please fill in all the fields")
-    return false;
-  }
-  if (password != confirmPassword) {
-    toast.error("Password do not match");
     return false;
   }
   if (password.length < 6) {

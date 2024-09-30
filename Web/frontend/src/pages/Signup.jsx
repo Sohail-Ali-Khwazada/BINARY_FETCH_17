@@ -4,23 +4,21 @@ import useSignup from "../hooks/useSignup";
 import login from './../assets/Images/login.png'; // Replace this with your actual image import
 import facebook from './../assets/Images/facebook.png';
 import google from './../assets/Images/google.png';
+
 export const Signup = () => {
-  // Update state to handle email, password, and confirm password inputs
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const { loading, signup } = useSignup(); // Assuming useSignup will still be used
+  const [role, setRole] = useState("user"); // Default role set to 'user'
+  const { loading, signup } = useSignup();
   const navigate = useNavigate();
 
-  // Update handleSubmit function to use email, password, and confirm password
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    const success = await signup({ email, password, confirmPassword });
-    if (success) navigate("/home");
+
+
+    const success = await signup({ fullName, email, password, role });
+    if (success) navigate("/");
   };
 
   return (
@@ -38,6 +36,19 @@ export const Signup = () => {
           </h2>
 
           <form onSubmit={handleSubmit}>
+            {/* Full Name Field */}
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm mb-2">Full Name</label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            {/* Email Field */}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm mb-2">Email ID</label>
               <input
@@ -49,6 +60,7 @@ export const Signup = () => {
               />
             </div>
 
+            {/* Password Field */}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm mb-2">Password</label>
               <input
@@ -60,22 +72,24 @@ export const Signup = () => {
               />
             </div>
 
+
+            {/* Role Dropdown */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm mb-2">Confirm Password</label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+              <label className="block text-gray-700 text-sm mb-2">Role</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="Re-enter your password"
-              />
+              >
+                <option value="doctor">Doctor</option>
+                <option value="careGiver">Care Giver</option>
+                <option value="familyMember">Family Member</option>
+              </select>
             </div>
 
             <button
               type="submit"
-              className={`w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition-colors ${
-                loading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
+              className={`w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition-colors ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
               disabled={loading}
             >
               {loading ? "Loading..." : "Sign Up"}
@@ -89,7 +103,7 @@ export const Signup = () => {
                 <img src={google} alt="Google Sign In" className="w-6 h-6" />
               </button>
               <button className="flex items-center justify-center bg-gray-200 p-3 rounded-full">
-                <img src={facebook}alt="Facebook Sign In" className="w-6 h-6" />
+                <img src={facebook} alt="Facebook Sign In" className="w-6 h-6" />
               </button>
             </div>
           </div>
