@@ -1,6 +1,8 @@
 // src/components/LoginPage.js
 import React, { useState } from "react";
 import loginImage from './../assets/Images/login.png';
+import facebook from './../assets/Images/facebook.png';
+import google from './../assets/Images/google.png';
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
@@ -21,10 +23,10 @@ export const Login = () => {
       {/* Navbar */}
       
 
-      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10">
+      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10 w-full">
         {/* Left: Image Section */}
         <div className="flex-1 hidden md:block">
-          <img src={loginImage} alt="Login Visual" className="w-full h-auto" />
+          <img src={loginImage} alt="Login Visual" className="w-[60%] h-auto mx-auto" />
         </div>
 
         {/* Right: Login Form */}
@@ -71,17 +73,17 @@ export const Login = () => {
             <span className="text-gray-600">or Sign in with</span>
             <div className="flex justify-center space-x-4 mt-4">
               <button className="flex items-center justify-center bg-gray-200 p-3 rounded-full">
-                <img src="/google-icon.png" alt="Google Sign In" className="w-6 h-6" />
+                <img src={google} alt="Google Sign In" className="w-6 h-6" />
               </button>
               <button className="flex items-center justify-center bg-gray-200 p-3 rounded-full">
-                <img src="/facebook-icon.png" alt="Facebook Sign In" className="w-6 h-6" />
+                <img src={facebook}alt="Facebook Sign In" className="w-6 h-6" />
               </button>
             </div>
           </div>
 
           <div className="text-center mt-4">
             <span className="text-gray-600">Don’t have an account?</span>
-            <a href="#" className="text-purple-600 ml-1 hover:underline">Create one</a>
+            <a href="signup" className="text-purple-600 ml-1 hover:underline">Create one</a>
           </div>
         </div>
       </div>

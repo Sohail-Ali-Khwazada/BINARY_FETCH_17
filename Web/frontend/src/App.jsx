@@ -8,6 +8,13 @@ import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./context/AuthContext";
+import ActivityPage from "./components/ActivityPage";
+import { NewActivityPage } from "./components/NewActivityPage";
+import { Contents } from "./pages/Contents";
+import { CaregiverDashboard } from "./pages/CaregiverDashboard";
+import { Settings } from "./pages/Settings";
+import { FamilyMarketPlace } from "./pages/FamilyMarketPlace";
+import { DoctorMarketPlace } from "./pages/DoctorMarketPlace";
 
 const router = createBrowserRouter([
   {
@@ -37,18 +44,53 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
-      }
+      },
+      {
+        path: "/contents",
+        element: <Contents/>,
+        children: [
+          {
+            path: "activity",
+            element: <ActivityPage />,
+          },
+          {
+            path: "new-activity",
+            element: <NewActivityPage />,
+          },
+          {
+            path:'dashboard',
+            element:<CaregiverDashboard/>,
+          },
+          {
+            path:'chats',
+            element:<div>Chats</div>,
+          },
+          {
+            path:'marketplace',
+            element:<FamilyMarketPlace/>,
+          },
+          {
+            path:'settings',
+            element:<Settings/>,
+          }
+        ],
+      },
     ],
+    
   },
+  {
+    path:'/doctor',
+    element:<DoctorMarketPlace/>
+  }
 ]);
 
 function App() {
   return (
     <>
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-      <Toaster />
-    </AuthContextProvider>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </AuthContextProvider>
     </>
   );
 }

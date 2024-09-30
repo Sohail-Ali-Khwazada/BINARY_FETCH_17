@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"
 export const Navbar = () => {
   return (
     <>
-      <nav className="flex px-[5rem] h-[5rem] items-center fixed gap-8 justify-between w-full">
+      <nav className="flex px-[5rem] h-[5rem] items-center fixed gap-8 justify-between w-full backdrop-blur-3xl z-50">
         <section className="logo flex gap-1 items-center">
           <img src={logo} alt="Logo" className="h-14" />
         </section>
