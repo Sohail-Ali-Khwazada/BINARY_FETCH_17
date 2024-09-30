@@ -2,28 +2,24 @@ import React, { useState } from 'react';
 import { AiFillBell } from 'react-icons/ai'; // Notification icon from react-icons
 
 export const NewActivityPage = () => {
-  const [eventName, setEventName] = useState('');
-  const [durationStart, setDurationStart] = useState('12:00 AM');
-  const [durationEnd, setDurationEnd] = useState('12:00 PM');
-  const [repeat, setRepeat] = useState('Does not repeat');
-  const [reminder, setReminder] = useState('30 minutes before');
-  const [description, setDescription] = useState('');
+  const [activityName, setActivityName] = useState('');
+  const [time, setTime] = useState('12:00');
+  const [date, setDate] = useState('');
+  const [activityType, setActivityType] = useState('Medication'); // Default value is Medication
 
   const handleSave = () => {
     // Handle save logic
     console.log({
-      eventName,
-      durationStart,
-      durationEnd,
-      repeat,
-      reminder,
-      description,
+      activityName,
+      time,
+      date,
+      activityType,
     });
   };
 
   const handleDelete = () => {
     // Handle delete logic
-    console.log('Event Deleted');
+    console.log('Activity Deleted');
   };
 
   return (
@@ -36,78 +32,55 @@ export const NewActivityPage = () => {
         </div>
 
         <div className="w-4/6 bg-[#fff7d4] mt-8 p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-6 text-center">Activity</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-6 text-center">
+            Add New Activity
+          </h2>
 
-          {/* Event Name Input */}
+          {/* Activity Name Input */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Event Name</label>
+            <label className="block text-sm font-medium text-gray-700">Activity Name</label>
             <input
               type="text"
-              value={eventName}
-              onChange={(e) => setEventName(e.target.value)}
+              value={activityName}
+              onChange={(e) => setActivityName(e.target.value)}
               className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Take Medicine"
+              placeholder="Activity Name"
             />
           </div>
 
-          {/* Duration Input */}
+          {/* Time Input */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Duration</label>
-            <div className="flex items-center space-x-2">
-              <input
-                type="time"
-                value={durationStart}
-                onChange={(e) => setDurationStart(e.target.value)}
-                className="block w-1/2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <span className="self-center text-gray-500">:</span>
-              <input
-                type="time"
-                value={durationEnd}
-                onChange={(e) => setDurationEnd(e.target.value)}
-                className="block w-1/2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
-          </div>
-
-          {/* Repeat Dropdown */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">To Repeat</label>
-            <select
-              value={repeat}
-              onChange={(e) => setRepeat(e.target.value)}
+            <label className="block text-sm font-medium text-gray-700">Time</label>
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
               className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="Does not repeat">Does not repeat</option>
-              <option value="Daily">Daily</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-            </select>
+            />
           </div>
 
-          {/* Reminder Dropdown */}
+          {/* Date Input */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Reminder</label>
-            <select
-              value={reminder}
-              onChange={(e) => setReminder(e.target.value)}
+            <label className="block text-sm font-medium text-gray-700">Date</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
               className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="30 minutes before">30 minutes before</option>
-              <option value="1 hour before">1 hour before</option>
-              <option value="1 day before">1 day before</option>
-            </select>
+            />
           </div>
 
-          {/* Add Description Input */}
+          {/* Activity Type Dropdown */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700">Add Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Add description"
+            <label className="block text-sm font-medium text-gray-700">Activity Type</label>
+            <select
+              value={activityType}
+              onChange={(e) => setActivityType(e.target.value)}
               className="mt-1 block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+            >
+              <option value="Medication">Medication</option>
+              <option value="Appointment">Appointment</option>
+            </select>
           </div>
 
           {/* Buttons */}
@@ -126,10 +99,7 @@ export const NewActivityPage = () => {
             </button>
           </div>
         </div>
-
-
       </div>
     </div>
   );
 };
-

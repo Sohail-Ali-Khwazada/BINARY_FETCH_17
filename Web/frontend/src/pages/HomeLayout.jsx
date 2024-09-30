@@ -7,9 +7,7 @@ export const HomeLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="flex border-2">
         <Outlet />
-      </div>
       <Footer />
     </>
   );

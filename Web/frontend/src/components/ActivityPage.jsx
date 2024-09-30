@@ -14,7 +14,7 @@ const ActivityPage = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Activity</h1>
           <button className="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full" onClick={()=>navigate('/contents/new-activity')}>
-            Add event +
+            New Reminder +
           </button>
         </div>
 

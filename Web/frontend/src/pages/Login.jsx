@@ -23,7 +23,7 @@ export const Login = () => {
       {/* Navbar */}
       
 
-      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10">
+      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10 w-full">
         {/* Left: Image Section */}
         <div className="flex-1 hidden md:block">
           <img src={loginImage} alt="Login Visual" className="w-[60%] h-auto mx-auto" />

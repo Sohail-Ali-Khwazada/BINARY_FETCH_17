@@ -11,6 +11,10 @@ import { AuthContextProvider } from "./context/AuthContext";
 import ActivityPage from "./components/ActivityPage";
 import { NewActivityPage } from "./components/NewActivityPage";
 import { Contents } from "./pages/Contents";
+import { CaregiverDashboard } from "./pages/CaregiverDashboard";
+import { Settings } from "./pages/Settings";
+import { FamilyMarketPlace } from "./pages/FamilyMarketPlace";
+import { DoctorMarketPlace } from "./pages/DoctorMarketPlace";
 
 const router = createBrowserRouter([
   {
@@ -55,16 +59,29 @@ const router = createBrowserRouter([
           },
           {
             path:'dashboard',
-            element:<div className="mt-20">Dashboard</div>,
+            element:<CaregiverDashboard/>,
           },
           {
-            path:'invitations',
-            element:<div>Invitatins</div>,
+            path:'chats',
+            element:<div>Chats</div>,
+          },
+          {
+            path:'marketplace',
+            element:<FamilyMarketPlace/>,
+          },
+          {
+            path:'settings',
+            element:<Settings/>,
           }
         ],
       },
     ],
+    
   },
+  {
+    path:'/doctor',
+    element:<DoctorMarketPlace/>
+  }
 ]);
 
 function App() {

@@ -16,10 +16,9 @@ const SidebarItem = ({ label, isActive, onClick }) => {
   );
 };
 
-
 export const Sidebar = () => {
   const [currentTab, setCurrentTab] = useState("your-activity");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="w-96 bg-white shadow-lg p-4 pt-20">
       <div className="flex items-center space-x-2">
@@ -28,41 +27,51 @@ export const Sidebar = () => {
         </div>
         <h2 className="text-xl font-semibold">Vansh</h2>
       </div>
-
       <ul className="mt-6">
         <SidebarItem
           label="Dashboard"
           isActive={currentTab === "dashboard"}
-          onClick={() => {setCurrentTab("dashboard")
-            navigate('/contents/dashboard')
+          onClick={() => {
+            setCurrentTab("dashboard");
+            navigate("/contents/dashboard");
           }} // Sets the current tab to dashboard
         />
+
         <SidebarItem
-          label="Invitations"
-          isActive={currentTab === "invitations"}
-          onClick={() => {setCurrentTab("invitations")
-            navigate('/contents/invitations')
-          }} // Sets the current tab to invitations
-        />
-        <SidebarItem
-          label="Your Activity"
-          isActive={currentTab === "your-activity"}
-          onClick={() => setCurrentTab("your-activity")} // Sets the current tab to your activity
+          label="Activity"
+          isActive={currentTab === "activity"}
+          onClick={() => {
+            setCurrentTab("activity");
+            navigate("/contents/Activity");
+          }} // Sets the current tab to your activity
         />
         <SidebarItem
           label="Chats"
           isActive={currentTab === "chats"}
-          onClick={() => setCurrentTab("chats")} // Sets the current tab to chats
+          onClick={() => {
+            setCurrentTab("chats");
+            navigate("/contents/chats");
+          }} // Sets the current tab to chats
+        />
+        <SidebarItem
+          label="Market Place"
+          isActive={currentTab === "marketplace"}
+          onClick={() => {
+            setCurrentTab("marketplace");
+            navigate("/contents/marketplace");
+          }} // Sets the current tab to chats
         />
         <SidebarItem
           label="Settings"
           isActive={currentTab === "settings"}
-          onClick={() => setCurrentTab("settings")} // Sets the current tab to settings
+          onClick={() => {
+            setCurrentTab("settings");
+            navigate("/contents/settings");
+          }} // Sets the current tab to settings
         />
       </ul>
-
       {/* User Section */}
-      <div className="relative bottom-4 w-64 p-4">
+      {/* <div className="absolute bottom-1 w-64 p-4 ">
         <div className="flex items-center space-x-2">
           <img
             src="https://via.placeholder.com/40" // Placeholder avatar
@@ -74,11 +83,10 @@ export const Sidebar = () => {
             <p className="text-xs text-gray-500">kamal452jk@google.com</p>
           </div>
           <button className="text-purple-500">
-            {/* Placeholder for logout icon */}
             <span>🔓</span>
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
