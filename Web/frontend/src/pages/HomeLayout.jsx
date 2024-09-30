@@ -6,7 +6,7 @@ export const HomeLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="page-container px-[5rem]">
+      <div className="page-container">
         <Outlet />
       </div>
       <Footer />
