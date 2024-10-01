@@ -10,6 +10,7 @@ import authRoutes from "./routes/auth.route.js"
 import userRoutes from "./routes/user.route.js"
 import messageRoutes from "./routes/message.route.js"
 import activityRoutes from "./routes/activity.route.js"
+import webinarRoutes from "./routes/webinar.route.js"
 
 
 // const app = express();
@@ -23,6 +24,7 @@ app.use("/api/auth",authRoutes);
 app.use("/api/user",userRoutes);
 app.use("/api/messages",messageRoutes);
 app.use("/api/activities",activityRoutes);
+app.use("/api/webinars", webinarRoutes)
 
 app.get("/",(req,res)=>{
   res.json({message: "Hello world"});
