@@ -13,7 +13,6 @@ function useSendMessage() {
     try {
       // Adjust the URL based on the environment (development/production)
       //change the URL to raj's server
-      console.log("selected",selectedConversation);
       const res = await fetch(`https://snj4j090-5000.inc1.devtunnels.ms/api/messages/send/${selectedConversation?._id}`, {
         method: "POST",
         headers: {

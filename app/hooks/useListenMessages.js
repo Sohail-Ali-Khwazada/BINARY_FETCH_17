@@ -10,7 +10,6 @@ function useListenMessages() {
 
   useEffect(() => {
     socket?.on("newMessage",(newMessage)=> {
-      console.log("newMessage said by ashish",newMessage);
       setMessages([...messages,newMessage]);
     })
     return () => socket?.off("newMessage");

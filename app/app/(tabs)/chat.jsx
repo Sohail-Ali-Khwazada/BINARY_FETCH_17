@@ -13,14 +13,6 @@ import useListenMessages from "../../hooks/useListenMessages";
 // Dummy profile image for all users
 const dummyProfileImage = "https://avatar.iran.liara.run/public/14";
 
-// // Sample messages for chat
-// const dummyMessages = [
-//   { id: 1, message: "Hi, how are you?", sender: "other" },
-//   { id: 2, message: "I'm doing well, thank you!", sender: "self" },
-//   { id: 3, message: "Don't forget to take your medication.", sender: "other" },
-//   { id: 4, message: "Sure, I won't!", sender: "self" },
-// ];
-
 export default function ChatApp() {
   const { user,selectedConversation,setSelectedConversation} = useGlobalContext();
   // const [selectedUser, setSelectedUser] = useState(null);
@@ -61,7 +53,7 @@ export default function ChatApp() {
     <SafeAreaView className="bg-gray-900 flex-1">
       <StatusBar style="light" />
 
-      {selectedConversation === null ?(
+      {Object.keys(selectedConversation).length === 0  ?(
         // User list view
         <ScrollView className="p-4 bg-gray-900">
           <Text className="text-white text-xl font-bold mb-4">Chats</Text>

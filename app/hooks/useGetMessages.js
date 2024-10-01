@@ -31,7 +31,6 @@ function useGetMessages() {
           }
         });
         const data = await res.json();
-        console.log("ashish ka data",data);
         if(data.error) throw new Error(data.error);
         setMessages(data);
       } catch (error) {
