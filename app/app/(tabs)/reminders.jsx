@@ -9,7 +9,7 @@ const Reminders = () => {
     const fetchActivities = async () => {
       try {
         const response = await fetch(
-          "https://6nddmv2g-5000.inc1.devtunnels.ms/api/activities/get-activities"
+          "https://snj4j090-5000.inc1.devtunnels.ms/api/activities/get-activities"
         );
         const data = await response.json();
         setActivities(data);

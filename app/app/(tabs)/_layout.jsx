@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 import { Tabs } from "expo-router";
 import FontAwesome from 'react-native-vector-icons/FontAwesome'; // Importing FontAwesome icons
 
-const TabIcon = ({iconName, color, name, focused}) => {
+const TabIcon = ({ iconName, color, name, focused }) => {
   return (
     <View className="items-center justify-center gap-2">
       <View><FontAwesome name={iconName} size={24} color={color} /></View>
@@ -44,17 +44,17 @@ const TabsLayout = () => {
           }}
         />
 
-        {/* Reminders Tab */}
+        {/* Messaging Tab */}
         <Tabs.Screen 
           name="chat" 
           options={{
-            title: "Messaging",
+            title: "Message",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon 
-                iconName="envelope" // Bell icon from FontAwesome
+                iconName="envelope" // Envelope icon from FontAwesome
                 color={color}
-                name="Messaging"
+                name="Message"
                 focused={focused}
               />
             )
@@ -106,6 +106,23 @@ const TabsLayout = () => {
                 iconName="user" // User icon from FontAwesome
                 color={color}
                 name="Profile"
+                focused={focused}
+              />
+            )
+          }}
+        />
+
+        {/* A.I Tab */}
+        <Tabs.Screen 
+          name="chatbot" 
+          options={{
+            title: "A.I",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                iconName="wechat" // Brain icon from FontAwesome for A.I
+                color={color}
+                name="A.I"
                 focused={focused}
               />
             )

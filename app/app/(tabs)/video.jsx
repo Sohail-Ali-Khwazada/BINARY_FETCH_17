@@ -6,7 +6,6 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const WebinarComponent = () => {
@@ -15,10 +14,17 @@ const WebinarComponent = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(
-          "https://6nddmv2g-5000.inc1.devtunnels.ms/api/webinars/get-webinars"
+        const response = await fetch(
+          "https://snj4j090-5000.inc1.devtunnels.ms/api/webinars/get-webinars"
         );
-        setWebinars(response.data);
+        
+        // Check if the response is OK (status in the range 200-299)
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setWebinars(data);
       } catch (e) {
         console.log(e);
       }

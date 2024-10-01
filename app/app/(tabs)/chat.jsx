@@ -82,7 +82,7 @@ export default function ChatApp() {
         <View className="flex-1 bg-gray-900">
           <View className="flex-row items-center p-4 bg-gray-800">
             {/* Back Button */}
-            <TouchableOpacity onPress={() => setSelectedConversation(null)} className="mr-4">
+            <TouchableOpacity onPress={() => setSelectedConversation({})} className="mr-4">
               <Image source={icons.leftArrow} resizeMode="contain" className="w-3 h-3" />
             </TouchableOpacity>
 
