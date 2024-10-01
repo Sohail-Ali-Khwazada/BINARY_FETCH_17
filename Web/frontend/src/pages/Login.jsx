@@ -7,21 +7,20 @@ import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loading, login } = useLogin();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await login(username, password);
-    if (success) navigate("/profile");  // Navigate to the profile page on success
+    const success = await login(email, password);
+    if (success) navigate("/");  // Navigate to the profile page on success
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-blue-100">
       {/* Navbar */}
-      
 
       <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-10 w-full">
         {/* Left: Image Section */}
@@ -35,13 +34,14 @@ export const Login = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm mb-2">Username</label>
+              <label className="block text-gray-700 text-sm mb-2">Email</label>
               <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="example@gmail.com"
+                required
               />
             </div>
 
@@ -53,6 +53,7 @@ export const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="Enter your password"
+                required
               />
             </div>
 
@@ -76,7 +77,7 @@ export const Login = () => {
                 <img src={google} alt="Google Sign In" className="w-6 h-6" />
               </button>
               <button className="flex items-center justify-center bg-gray-200 p-3 rounded-full">
-                <img src={facebook}alt="Facebook Sign In" className="w-6 h-6" />
+                <img src={facebook} alt="Facebook Sign In" className="w-6 h-6" />
               </button>
             </div>
           </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import { AiFillBell } from "react-icons/ai"; // Importing the bell icon from react-icons
 import Calendar from "./Calendar";
+import profile from './../assets/Images/profile.jpg'; 
 
 // Elder Information
 const elder = {
   name: "Kamalesh J",
-  age: 72,
+  age: 42,
   gender: "Male",
   photo: "https://via.placeholder.com/150",
   emergencyContact: "+91-9123456789",
@@ -48,7 +49,7 @@ export const CaregiverDashboard = () => {
               {/* Profile Picture and Basic Info */}
               <div className="flex flex-col items-center">
                 <img
-                  src={elder.photo}
+                  src={profile}
                   alt="Elder's Profile"
                   className="w-32 h-32 rounded-full mb-4"
                 />

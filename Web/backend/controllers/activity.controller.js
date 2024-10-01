@@ -11,19 +11,14 @@ export const getActivities = async (req, res) => {
 }
 
 export const createActivity = async (req, res) => {
-  const activity = {
-    activityName: "Afternoon Medication",
-    time: "14:00",
-    date: "2024-09-30T14:00:00.000Z",
-    activityType: "medication",
-  };
-  // const activity = req.body;
-  const newActivity = new Activity(activity);
+  
+  const {activityName, time,date,activityType} = req.body;
+  const newActivity = new Activity({activityName, time,date,activityType});
 
   try {
     await newActivity.save();
-    res.status(201).json(newActivity);
+    res.status(200).json(newActivity);
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.json({ message: error.message });
   }
 }

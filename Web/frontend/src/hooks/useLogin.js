@@ -9,8 +9,8 @@ function useLogin() {
   const [loading, setLoading] = useState(false);
   const {setAuthUser,setAuthToken} = useAuthContext();
 
-  const login = async(username,password) => {
-    const success = handleInputErrors(username,password);
+  const login = async(email,password) => {
+    const success = handleInputErrors(email,password);
 
     if(!success) return false;
     setLoading(true);
@@ -19,7 +19,7 @@ function useLogin() {
       const res = await fetch("http://localhost:5000/api/auth/login",{
         method: "Post",
         headers: {"Content-Type" : "application/json"},
-        body: JSON.stringify({username,password}),
+        body: JSON.stringify({email,password}),
       });
       const data = await res.json();
       if(data.error) {
@@ -47,8 +47,8 @@ function useLogin() {
 
 export default useLogin;
 
-function handleInputErrors(username,password) {
-  if(!username || !password) {
+function handleInputErrors(email,password) {
+  if(!email || !password) {
     toast.error("Please fill in all the fields")
     return false;
   }

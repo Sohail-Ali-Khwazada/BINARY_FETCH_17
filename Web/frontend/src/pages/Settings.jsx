@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Import Axios
-
+import profile from './../assets/Images/profile.jpg'; 
 export const Settings = () => {
   const [editMode, setEditMode] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -57,10 +57,8 @@ export const Settings = () => {
       {/* Settings Form */}
       <div className="w-3/4 bg-gray-50 p-8">
         <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="mb-4">
-            <button className="border-dashed border-2 border-gray-300 py-10 text-gray-500 rounded-[50%] w-52 h-52">
-              Upload your photo
-            </button>
+          <div className="mb-4 w-40 h-40 rounded-full">
+            <img src={profile} alt="" className='rounded-full'/>
           </div>
 
           {/* Form Fields */}

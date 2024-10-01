@@ -1,25 +1,56 @@
 import React, { useState } from 'react';
 import { AiFillBell } from 'react-icons/ai'; // Notification icon from react-icons
+import { useNavigate } from 'react-router-dom';
 
 export const NewActivityPage = () => {
   const [activityName, setActivityName] = useState('');
   const [time, setTime] = useState('12:00');
   const [date, setDate] = useState('');
   const [activityType, setActivityType] = useState('Medication'); // Default value is Medication
+  const [error, setError] = useState(null); // Error state
+  const [success, setSuccess] = useState(null); // Success state
+  const  navigate  = useNavigate();
+  const handleSave = async () => {
+    if (!activityName || !time || !date || !activityType) {
+      setError("Please fill all the fields.");
+      return;
+    }
 
-  const handleSave = () => {
-    // Handle save logic
-    console.log({
-      activityName,
-      time,
-      date,
-      activityType,
-    });
+    try {
+      const res = await fetch('http://127.0.0.1:5000/api/activities/create-activity', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          activityName,
+          time,
+          date,
+          activityType,
+        }),
+      });
+
+      if (res.ok) {
+        setSuccess('Activity Saved Successfully!');
+        setError(null);
+        navigate('/contents/Activity')
+      } else {
+        setError('Failed to save activity. Please try again.');
+        setSuccess(null);
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Network error. Please check your connection.');
+      setSuccess(null);
+    }
   };
 
   const handleDelete = () => {
-    // Handle delete logic
-    console.log('Activity Deleted');
+    const confirmDelete = window.confirm('Are you sure you want to delete this activity?');
+    if (confirmDelete) {
+      console.log('Activity Deleted');
+      setSuccess('Activity Deleted Successfully!');
+    }
   };
 
   return (
@@ -35,6 +66,10 @@ export const NewActivityPage = () => {
           <h2 className="text-xl font-semibold text-gray-700 mb-6 text-center">
             Add New Activity
           </h2>
+
+          {/* Error/Success Messages */}
+          {error && <div className="mb-4 text-red-500">{error}</div>}
+          {success && <div className="mb-4 text-green-500">{success}</div>}
 
           {/* Activity Name Input */}
           <div className="mb-4">
