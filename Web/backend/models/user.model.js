@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true
@@ -15,14 +15,10 @@ const userSchema = new mongoose.Schema({
       required: true,
       minlength: 6
     },
-    gender: {
-      type:String,
-      required: true,
-      enum:["male","female"]
-    },
-    profilePic: {
+    role: {
       type: String,
-      default: ""
+      enum: ['user', 'careGiver', 'doctor', 'familyMember'],
+      default: 'user'
     }
 },{timestamps:true});
 

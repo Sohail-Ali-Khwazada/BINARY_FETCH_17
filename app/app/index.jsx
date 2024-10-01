@@ -6,6 +6,7 @@ import { images } from "../constants"; // Ensure images is properly exported
 import { router } from "expo-router";
 
 export default function App() {
+
   return (
     <SafeAreaView className="flex-1 bg-[#0f0f1f]">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

@@ -1,90 +1,92 @@
-// import { View, Text, ScrollView, Image, Alert } from "react-native";
-// import React, { useState } from "react";
-// import { SafeAreaView } from "react-native-safe-area-context";
-// import { images } from "../../constants";
-// import FormField from "../../components/FormField";
-// import CustomButton from "../../components/CustomButton";
-// import { Link, router } from "expo-router";
-// import { signIn } from "../../lib/appwrite";
+import React, { useState } from 'react';
+import { View, TextInput, Text, TouchableOpacity, ScrollView, Alert, Image } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { icons } from '../../constants';
+import { router } from 'expo-router';
+import { useGlobalContext } from './../../context/GlobalProvider';
 
-// const SignIn = () => {
-//   const [form, setForm] = useState({
-//     email: "",
-//     password: "",
-//   });
 
-//   const [isSubmitting, setisSubmitting] = useState(false);
+export default function SignIn() {
+  const { setUser } = useGlobalContext(); // Context to manage user state
 
-//   const submit = async() => {
-//     if(!form.email || !form.password) {
-//       Alert.alert("Error", "Please fill in all the fields");
-//     }
-//     setisSubmitting(true);
-//     try {
-//       await signIn(form.email,form.password);
-//       //set it to global state..
-//       router.replace("/home");
-//     } catch(error) {
-//       Alert.alert("Error",error.message)
-//     } finally{
-//       setisSubmitting(false);
-//     }
-//   };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-//   return (
-//     <SafeAreaView className="bg-primary h-full">
-//       <ScrollView>
-//         <View className="w-full justify-center min-h-[83vh] px-4 my-6">
-//           <Image
-//             source={images.logo}
-//             resizeMode="contain"
-//             className="w-[115px] h-[35px]"
-//           />
-//           <Text className="text-2xl text-white mt-10 font-psemibold">
-//             Log in to Aora
-//           </Text>
-//           <FormField
-//             title="Email"
-//             value={form.email}
-//             handleChangeText={(e) => setForm({ ...form, email: e })}
-//             otherStyles="mt-7"
-//             keyboardType="email-address"
-//           />
-//           <FormField
-//             title="Password"
-//             value={form.password}
-//             handleChangeText={(p) => setForm({ ...form, password: p })}
-//             otherStyles="mt-7"
-//           />
-//           <CustomButton
-//             title={"Sign In"}
-//             handlePress={submit}
-//             containerStyles={"mt-7"}
-//             isLoading={isSubmitting}
-//           />
-//           <View className="justify-center pt-5 flex-row gap-2">
-//             <Text className="text-lg text-gray-100 font-pregular">Don't have account?</Text>
-//             <Link href="/sign-up" className="text-lg font-psemibold text-secondary">
-//               Sign up
-//             </Link>
-//           </View>
-//         </View>
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// };
+  const handleSignIn = async() => {
+    if (!email || !password) {
+      Alert.alert('Please fill in all fields.');
+      return;
+    }
+    try {
+      const response = await fetch('https://6nddmv2g-5000.inc1.devtunnels.ms/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-// export default SignIn;
+      const data = await response.json();
 
-import { View, Text } from 'react-native'
-import React from 'react'
+      if (response.ok) {
+        console.log(data);
+        setUser(data); 
+        router.push('/home'); 
+      } else {
+        throw new Error(data.message || 'Sign In Failed');
+      }
+      
+    } catch (err) {
+      console.error(err); // Log the error for debugging
+      Alert.alert('Sign In Failed!', err.message || 'Please try again later.');
+    }
+  };
 
-const SignIn = () => {
   return (
-    <View>
-      <Text>sign-in</Text>
-    </View>
-  )
-}
+    <ScrollView className="flex-1 bg-primary p-4 pt-20">
+      <StatusBar style="light" />
+      <View className="flex-col items-center justify-center w-full">
+        <Image source={icons.logo} className="w-32 h-32 mb-4" resizeMode='contain' />
+        <Text className="text-3xl font-bold text-center mb-8 text-secondary-100">Sign In</Text>
+        
+        <View className="mb-4 w-full">
+          <Text className="text-gray-300 mb-2">Email</Text>
+          <TextInput 
+            className="border border-gray-600 bg-black-200 text-white p-3 rounded-lg shadow-md"
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            placeholderTextColor="#CDCDE0"
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        
+        <View className="mb-4 w-full">
+          <Text className="text-gray-300 mb-2">Password</Text>
+          <TextInput 
+            className="border border-gray-600 bg-black-200 text-white p-3 rounded-lg shadow-md"
+            placeholder="Enter your password"
+            secureTextEntry
+            placeholderTextColor="#CDCDE0"
+            value={password}
+            onChangeText={setPassword}
+          />
+        </View>
+        
+        <TouchableOpacity 
+          className="bg-secondary-100 p-3 rounded-lg shadow-md w-full"
+          onPress={handleSignIn}
+        >
+          <Text className="text-white text-center font-semibold text-lg">Sign In</Text>
+        </TouchableOpacity>
 
-export default SignIn
+        <TouchableOpacity className="mt-4" onPress={() => router.push('/sign-up')}>
+          <Text className="text-center text-gray-400">
+            Don't have an account?{' '}
+            <Text className="text-secondary-100 font-semibold">Sign Up</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
