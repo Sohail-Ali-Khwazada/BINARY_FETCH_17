@@ -13,21 +13,27 @@ import { icons } from "../../constants";
 import { router } from "expo-router";
 import * as Location from "expo-location";
 import {useGlobalContext} from './../../context/GlobalProvider';
+import {useSocketContext} from './../../context/SocketContext';
 
 const Home = () => {
-  const [heartRate, setHeartRate] = useState(72); 
+  // const [heartRate, setHeartRate] = useState(70); 
   const [steps, setSteps] = useState(1000); 
   const [sleep, setSleep] = useState("1 hrs");
   const [isStepActive, setIsStepActive] = useState(false); // Track if step counting is active
   const {user} = useGlobalContext();
+  const {socket} = useSocketContext();
+  let heartRate = 70;
+  let isStop = false
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setHeartRate((prevHeartRate) => {
-        const change = Math.random() < 0.5 ? 1 : -1; 
-        return Math.max(40, prevHeartRate + change); 
-      });
-
+      heartRate--;
+      console.log("ashish",heartRate);
+      if((heartRate > 100 || heartRate < 60)&& !isStop) {
+        isStop = true;
+        
+        socket.emit("alert",{message:"Heart rate is too high. Please consult a doctor."});
+      }
       if (isStepActive) {
         setSteps((prevSteps) => {
           // Increment steps by 10 if active
@@ -39,7 +45,6 @@ const Home = () => {
     return () => clearInterval(intervalId);
   }, [isStepActive]); // Depend on isStepActive
 
-  const [activities, setActivities] = useState([]);
   const [location, setLocation] = useState(null);
   const emergencyContactNumber = "9136102120";
 
@@ -84,19 +89,7 @@ const Home = () => {
 
     requestLocationPermission();
 
-    const fetchActivities = async () => {
-      try {
-        const response = await fetch(
-          "https://6nddmv2g-5000.inc1.devtunnels.ms/api/activities/get-activities"
-        );
-        const data = await response.json();
-        setActivities(data);
-      } catch (error) {
-        console.error("Error fetching activities: ", error);
-      }
-    };
 
-    fetchActivities();
   }, []);
 
   // Function to toggle step counting
@@ -148,38 +141,11 @@ const Home = () => {
           ))}
         </View>
 
-        {/* Upcoming Reminders */}
-        <View className="p-5 bg-black-100 rounded-lg mx-6 shadow-sm">
-          <Text className="text-white font-semibold text-lg">
-            Upcoming Reminders
-          </Text>
-          <View className="mt-4">
-            {activities.map((activity) => (
-              <View
-                key={activity._id}
-                className="flex-row items-center bg-slate-600 p-4 rounded-lg mb-3 shadow-md"
-              >
-                {/* Colored Dot */}
-                <View
-                  className={`w-3 h-3 rounded-full mr-3 ${
-                    activity.activityType === "medication"
-                      ? "bg-blue-500"
-                      : "bg-green-500"
-                  }`}
-                />
-                {/* Activity Details */}
-                <Text className="text-white text-base">
-                  {activity.activityType === "medication"
-                    ? `Medication Reminder: ${activity.time} - ${activity.activityName}`
-                    : `Appointment: ${activity.time} - ${activity.activityName}`}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </View>
+       
+        
 
         {/* Emergency Contact */}
-        <View className="p-6 mx-6">
+        <View className="p-6 mx-6 mt-16">
           <TouchableOpacity
             className="bg-red-600 rounded-full py-5 items-center shadow-lg"
             onPress={handleEmergencyAlert}
@@ -194,7 +160,7 @@ const Home = () => {
         </View>
 
         {/* Quick Access Features */}
-        <View className="flex-row justify-between px-6 mb-10">
+        <View className="flex-row justify-between px-6 mt-14">
           <TouchableOpacity className="bg-secondary-100 rounded-lg p-5 w-[48%] items-center shadow-sm">
             <Text className="text-white font-semibold">Health Tracking</Text>
           </TouchableOpacity>
