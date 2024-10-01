@@ -13,7 +13,7 @@ export const signUp = async (req, res) => {
     }
     
     const hashPassword = await bcrypt.hash(password, 10);
-
+    console.log('role :', role);
     const newUser = await User.create({
       fullName,
       email,
@@ -21,7 +21,7 @@ export const signUp = async (req, res) => {
       role:role || "user"
     })
 
-    console.log('newUser', newUser);
+    console.log('newUser : ', newUser);
     if (newUser) {
       const token = generateTokenAndSetCookie(newUser._id, res);
       res.status(201).json({
@@ -56,8 +56,8 @@ export const loginUser = async (req, res) => {
     res.status(200).json({
       _id: user._id,
       fullName: user.fullName,
-      username: user.username,
       email: user.email,
+      role: user.role,
       // profilePic: user.profilePic,
       token
     });

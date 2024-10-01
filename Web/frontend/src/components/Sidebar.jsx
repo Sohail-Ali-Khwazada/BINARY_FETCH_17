@@ -45,14 +45,14 @@ export const Sidebar = () => {
             navigate("/contents/Activity");
           }} // Sets the current tab to your activity
         />
-        <SidebarItem
+        {/* <SidebarItem
           label="Chats"
           isActive={currentTab === "chats"}
           onClick={() => {
             setCurrentTab("chats");
             navigate("/contents/chats");
           }} // Sets the current tab to chats
-        />
+        /> */}
         <SidebarItem
           label="Market Place"
           isActive={currentTab === "marketplace"}
@@ -68,6 +68,14 @@ export const Sidebar = () => {
             setCurrentTab("settings");
             navigate("/contents/settings");
           }} // Sets the current tab to settings
+        />
+        <SidebarItem
+          label="Create Voice Call"
+          isActive={currentTab === "voicecall"}
+          onClick={() => {
+            setCurrentTab("voicecall");
+            navigate("/contents/create-meet");
+          }}
         />
       </ul>
       {/* User Section */}

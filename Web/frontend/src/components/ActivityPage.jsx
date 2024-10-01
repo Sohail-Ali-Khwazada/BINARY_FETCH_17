@@ -12,7 +12,7 @@ const ActivityPage = () => {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const res = await fetch('https://6nddmv2g-5000.inc1.devtunnels.ms/api/activities/get-activities');
+        const res = await fetch('https://snj4j090-5000.inc1.devtunnels.ms/api/activities/get-activities');
         const data = await res.json();
         console.log(data);
 
@@ -43,7 +43,7 @@ const ActivityPage = () => {
           </button>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 ">
           {/* Activity Cards */}
           {activities.map((activity, index) => (
             <ActivityCard key={activity._id} color={colors[index % colors.length]} activity={activity} />

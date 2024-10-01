@@ -5,17 +5,21 @@ import facebook from './../assets/Images/facebook.png';
 import google from './../assets/Images/google.png';
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
+import { useAuthContext } from "../context/AuthContext";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loading, login } = useLogin();
+  const {authUser} = useAuthContext()
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await login(email, password);
-    if (success) navigate("/");  // Navigate to the profile page on success
+    console.log(authUser)
+    if(authUser.role === "doctor") navigate("/doctor");
+    else navigate("/contents/dashboard");
   };
 
   return (

@@ -17,7 +17,7 @@ export const NewActivityPage = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/activities/create-activity', {
+      const res = await fetch('https://snj4j090-5000.inc1.devtunnels.ms/api/activities/create-activity', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

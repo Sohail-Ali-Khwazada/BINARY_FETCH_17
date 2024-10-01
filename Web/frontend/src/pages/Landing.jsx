@@ -17,8 +17,8 @@ export const Landing = () => {
         <source src={bgVideo} />
         Your browser does not support the video tag.
       </video>
-      <div className="absolute inset-0 bg-black bg-opacity-50 h-[112vh]"></div>
-      <section className="absolute inset-0 flex flex-col items-start justify-center px-20">
+      <div className="absolute inset-0 bg-black bg-opacity-50 h-full"></div>
+      <section className="absolute inset-0 flex flex-col items-start justify-center px-20 h-full">
         <h2 className="text-2xl text-white mb-2">
           We Are <span className="text-orange-500">WiseCare</span>
         </h2>

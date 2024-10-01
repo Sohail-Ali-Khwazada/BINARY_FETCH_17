@@ -15,6 +15,7 @@ import { CaregiverDashboard } from "./pages/CaregiverDashboard";
 import { Settings } from "./pages/Settings";
 import { FamilyMarketPlace } from "./pages/FamilyMarketPlace";
 import { DoctorMarketPlace } from "./pages/DoctorMarketPlace";
+import CreateMeet from "./pages/CreateMeet";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/contents",
-        element: <Contents/>,
+        element: <Contents />,
         children: [
           {
             path: "activity",
@@ -58,30 +59,33 @@ const router = createBrowserRouter([
             element: <NewActivityPage />,
           },
           {
-            path:'dashboard',
-            element:<CaregiverDashboard/>,
+            path: "dashboard",
+            element: <CaregiverDashboard />,
           },
           {
-            path:'chats',
-            element:<div>Chats</div>,
+            path: "chats",
+            element: <div>Chats</div>,
           },
           {
-            path:'marketplace',
-            element:<FamilyMarketPlace/>,
+            path: "marketplace",
+            element: <FamilyMarketPlace />,
           },
           {
-            path:'settings',
-            element:<Settings/>,
-          }
+            path: "settings",
+            element: <Settings />,
+          },
+          {
+            path: "create-meet",
+            element: <CreateMeet />,
+          },
         ],
       },
     ],
-    
   },
   {
-    path:'/doctor',
-    element:<DoctorMarketPlace/>
-  }
+    path: "/doctor",
+    element: <DoctorMarketPlace />,
+  },
 ]);
 
 function App() {
